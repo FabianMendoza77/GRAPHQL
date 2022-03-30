@@ -1,2 +1,2 @@
 # GRAPHQL
-Interesting practice exercises on Graphql
+Interesting practice exercises on Graphql.
