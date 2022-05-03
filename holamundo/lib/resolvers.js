@@ -24,45 +24,14 @@
 //     }
 // ]
 
-const connectDb = require('./db')
-const { ObjectId } = require('mongodb')
+const queries = require('./queries')
+const mutations = require('./mutations')
+const types = require('./types')
 
 module.exports = {
-    Query: {
-        getCourses: async () =>
-        {
-            let db
-            let courses = []
-            try
-            {
-                db = await connectDb()
-                courses = await db.collection('courses').find().toArray()
-            } catch (error)
-            {
-                console.error(error)
-            }
-
-            return courses
-        },
-        getCourse: async (root, { id }) =>
-        {
-            // const course = courses.filter(course => course._id === args.id)
-            // return course.pop()
-
-            let db
-            let course
-            try
-            {
-                db = await connectDb()
-                course = await db.collection('courses').findOne({ _id: ObjectId(id) })
-            } catch (error)
-            {
-                console.error(error)
-            }
-
-            return course
-        }
-    }
+    Query: queries,
+    Mutation: mutations,
+    ...types
 }
 
 // module.exports = {

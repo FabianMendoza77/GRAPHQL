@@ -1,0 +1,86 @@
+
+query{
+  getStudents{
+    _id
+  	name
+  }  
+}
+
+
+query{
+  getCourses{
+    _id
+  	title
+    description
+    people{
+      _id
+      name
+      email
+    }
+  }
+  
+  getStudents{
+    _id
+    name
+    email
+  }
+}
+
+{
+	getPeople{
+    _id
+    name
+    email
+    ... on Monitor {
+      phone
+    }
+    ... on Student {
+      avatar
+    }    
+  }
+}
+
+
+62675761ce8f54249c49319f
+626757a1ce8f54249c4931a0
+
+mutation{
+  addPeople(courseID:"625ee3f2af14b77184e8576a", personID:"626757a1ce8f54249c4931a0"){
+    _id
+    title
+  }
+}
+
+db.students.createIndex({"$**": "text"})
+
+{
+	getPeople{
+    _id
+    name
+    email
+    ... on Monitor {
+      phone
+    }
+    ... on Student {
+      avatar
+    }    
+  }
+}
+
+{
+  searchItems(keyword: "Titulo"){
+    __typename
+    ... on Course {
+      title
+      description
+    }
+    ... on Monitor {
+      name
+      phone
+    }
+    ... on Student {
+      name
+      email
+    }
+  }
+}

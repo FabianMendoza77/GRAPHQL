@@ -1,0 +1,13 @@
+Mongo--> db.students.createIndex({"$**": "text"})
+
+npm i cors
+
+curl query | jq
+
+
+Clientes para consumir queries GraphQL:
+FetchQL (light)
+Graphql-request (easy)
+Apollo Client
+Relay (facebook, es un framework q se integra con librearias front)
+

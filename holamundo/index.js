@@ -3,6 +3,7 @@
 require('dotenv').config()
 const { makeExecutableSchema } = require('graphql-tools')
 const express = require('express')
+const cors = require('cors')
 const { graphqlHTTP } = require('express-graphql')
 const { readFileSync } = require('fs')
 const { join } = require('path')
@@ -10,6 +11,7 @@ const resolvers = require('./lib/resolvers')
 
 const app = express()
 const port = process.env.port || 3000
+const isDev = process.env.NODE_ENV !== 'production '
 
 // Definir schema inicial.
 // const schema = buildSchema(`
@@ -40,10 +42,13 @@ const schema = makeExecutableSchema(
 //     console.log(data);
 // })
 
+// La api se deja abierta, pero se puede restringir el acceso a ciertos host
+app.use(cors())
+
 app.use('/api', graphqlHTTP({
     schema: schema,
     rootValue: resolvers,
-    graphiql: true
+    graphiql: isDev
 }))
 
 app.listen(port, () =>
